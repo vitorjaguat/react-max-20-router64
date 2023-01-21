@@ -28,10 +28,12 @@ import EventDetail, {
 } from './pages/EventDetail';
 import Events, { loader as eventsLoader } from './pages/Events';
 import Home from './pages/Home';
-import NewEvent, { action as newEventAction } from './pages/NewEvent';
+import NewEvent from './pages/NewEvent';
 import Root from './pages/Root';
 import EventsRoot from './pages/EventsRoot';
 import Error from './pages/Error';
+import { action as manipulateEventAction } from './components/EventForm'
+import NewsletterPage, { action as newsletterAction} from './pages/Newsletter';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,11 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       { index: true, element: <Home /> },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: newsletterAction,
+      },
       {
         path: 'events',
         element: <EventsRoot />,
@@ -59,10 +66,10 @@ const router = createBrowserRouter([
                 element: <EventDetail />,
                 action: deleteEventAction,
               },
-              { path: 'edit', element: <EditEvent /> },
+              { path: 'edit', element: <EditEvent />, action: manipulateEventAction },
             ],
           },
-          { path: 'new', element: <NewEvent />, action: newEventAction },
+          { path: 'new', element: <NewEvent />, action: manipulateEventAction },
         ],
       },
     ],
